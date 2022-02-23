@@ -1,4 +1,3 @@
-import { Home } from './src/screens'
 import {
   useFonts,
   SourceSansPro_400Regular,
@@ -9,6 +8,7 @@ import {
 import AppLoading from 'expo-app-loading'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './src/styles'
+import { Routes } from './src/routes'
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Routes />
     </ThemeProvider>
   )
 }

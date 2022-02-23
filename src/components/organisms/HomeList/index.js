@@ -20,7 +20,7 @@ export const HomeList = () => {
             horizontal
             data={FAKE_DATA}
             renderItem={({ item }) => <Card item={item} />}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => String(item.id)}
         />
     )
 };

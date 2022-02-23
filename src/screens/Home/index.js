@@ -1,8 +1,9 @@
-import { HomeList, Container } from '../../components'
+import { HomeList, Container, Hero } from '../../components'
 
 export const Home = () => {
   return (
-    <Container align="center" justify="center">
+    <Container align="flex-start" justify="flex-start">
+      <Hero />
       <HomeList />
     </Container>
   )
