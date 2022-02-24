@@ -1,6 +1,12 @@
-import { HeroContainer, HeroGradient, HeroImageBackground } from './styles'
-import { colors } from '~/styles/colors';
-import { Text, Logo } from '~/components/atoms';
+import {
+  HeroContainer,
+  HeroGradient,
+  HeroImageBackground,
+  ButtonsView,
+} from './styles'
+import { colors } from '~/styles/colors'
+import { Text, Logo } from '~/components/atoms'
+import { Tag, IconButton, PlayButton } from '~/components/molecules'
 
 export const Hero = () => {
   return (
@@ -12,8 +18,19 @@ export const Hero = () => {
       >
         <HeroGradient colors={[colors.dark, 'transparent', colors.dark]}>
           <Logo size="small" />
-          <Text>Episódio I</Text>
-          <Text>A Ameaça Fantasma</Text>
+          <Tag mt={200}>Filme</Tag>
+          <Text fontFamily="bold" size={28} mt={8}>
+            Episódio I
+          </Text>
+          <Text size={18}>A Ameaça Fantasma</Text>
+          <ButtonsView>
+            <IconButton label="Favoritos" iconName="add-circle-outline" />
+            <PlayButton />
+            <IconButton
+              label="Saiba mais"
+              iconName="information-circle-outline"
+            />
+          </ButtonsView>
         </HeroGradient>
       </HeroImageBackground>
     </HeroContainer>
