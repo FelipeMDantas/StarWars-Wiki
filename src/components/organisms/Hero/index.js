@@ -8,21 +8,22 @@ import { colors } from '~/styles/colors'
 import { Text, Logo } from '~/components/atoms'
 import { Tag, IconButton, PlayButton } from '~/components/molecules'
 
-export const Hero = () => {
+export const Hero = ({ item }) => {
+  const { image_url, title, subtitle, type } = item;
   return (
     <HeroContainer>
       <HeroImageBackground
         source={{
-          uri: 'https://static.wikia.nocookie.net/dublagempedia/images/7/7d/Pedro_el_malo.jpg/revision/latest?cb=20200620052955&path-prefix=pt-br',
+          uri: image_url
         }}
       >
         <HeroGradient colors={[colors.dark, 'transparent', colors.dark]}>
           <Logo size="small" />
-          <Tag mt={200}>Filme</Tag>
+          <Tag mt={200}>{type}</Tag>
           <Text fontFamily="bold" size={28} mt={8}>
-            Episódio I
+            {title}
           </Text>
-          <Text size={18}>A Ameaça Fantasma</Text>
+          <Text size={18}>{subtitle}</Text>
           <ButtonsView>
             <IconButton label="Favoritos" iconName="add-circle-outline" />
             <PlayButton />
