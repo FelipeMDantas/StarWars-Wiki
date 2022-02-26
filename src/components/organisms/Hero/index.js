@@ -8,18 +8,18 @@ import { colors } from '~/styles/colors'
 import { Text, Logo } from '~/components/atoms'
 import { Tag, IconButton, PlayButton } from '~/components/molecules'
 
-export const Hero = ({ item }) => {
-  const { image_url, title, subtitle, type } = item;
+export const Hero = ({ item, onDetail }) => {
+  const { image_url, title, subtitle, type } = item
   return (
     <HeroContainer>
       <HeroImageBackground
         source={{
-          uri: image_url
+          uri: image_url,
         }}
       >
         <HeroGradient colors={[colors.dark, 'transparent', colors.dark]}>
-          <Logo size="small" />
-          <Tag mt={200}>{type}</Tag>
+          {!onDetail && <Logo size="small" />}
+          <Tag mt={onDetail ? 224 : 200}>{type}</Tag>
           <Text fontFamily="bold" size={28} mt={8}>
             {title}
           </Text>
@@ -27,10 +27,12 @@ export const Hero = ({ item }) => {
           <ButtonsView>
             <IconButton label="Favoritos" iconName="add-circle-outline" />
             <PlayButton />
-            <IconButton
-              label="Saiba mais"
-              iconName="information-circle-outline"
-            />
+            {!onDetail && (
+              <IconButton
+                label="Saiba mais"
+                iconName="information-circle-outline"
+              />
+            )}
           </ButtonsView>
         </HeroGradient>
       </HeroImageBackground>
