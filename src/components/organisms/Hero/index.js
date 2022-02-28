@@ -7,9 +7,17 @@ import {
 import { colors } from '~/styles/colors'
 import { Text, Logo } from '~/components/atoms'
 import { Tag, IconButton, PlayButton } from '~/components/molecules'
+import { useFavorites } from '~/services/hooks'
 
 export const Hero = ({ item, onDetail }) => {
+  const { addFavorite, getFavorites } = useFavorites()
   const { image_url, title, subtitle, type } = item
+
+  const addDataAsFavorite = async () => {
+    const result = await addFavorite(item)
+    console.log({ result })
+  }
+
   return (
     <HeroContainer>
       <HeroImageBackground
@@ -25,7 +33,7 @@ export const Hero = ({ item, onDetail }) => {
           </Text>
           <Text size={18}>{subtitle}</Text>
           <ButtonsView>
-            <IconButton label="Favoritos" iconName="add-circle-outline" />
+            <IconButton onPress={() => addDataAsFavorite()} label="Favoritos" iconName="add-circle-outline" />
             <PlayButton />
             {!onDetail && (
               <IconButton
