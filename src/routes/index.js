@@ -8,34 +8,15 @@ import {
   SearchScreen,
   FavoritesScreen,
 } from '../screens'
-import { theme } from '~/styles/theme'
-import { Ionicons } from '@expo/vector-icons'
-
-const routeIcons = {
-  Home: 'home-outline',
-  Search: 'search-outline',
-  Favorites: 'heart-outline',
-}
+import { BottomBar } from '~/components'
 
 const BottomRoute = () => {
   const Tab = createBottomTabNavigator()
 
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarActiveTintColor: theme.colors.red,
-        tabBarInactiveTintColor: theme.colors.dark,
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
-          return (
-            <Ionicons name={routeIcons[route.name]} size={size} color={color} />
-          )
-        },
-        tabBarStyle: {
-          backgroundColor: theme.colors.black
-        }
-      })}
-    >
+    <Tab.Navigator 
+    screenOptions={() => ({ headerShown: false, })}
+    tabBar={(props) => <BottomBar {...props} />} >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={SearchScreen} options={{ tabBarLabel: 'Pesquisar' }} />
       <Tab.Screen name="Favorites" component={FavoritesScreen} options={{ tabBarLabel: 'Favoritos' }} />
