@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const DB_KEY = '@StarWarsWiki:Favorites'
 
-AsyncStorage.clear();
+//AsyncStorage.clear()
 
 export const useFavorites = () => {
   const addFavorite = async (data) => {
@@ -12,7 +12,7 @@ export const useFavorites = () => {
       if (value !== null) {
         //there already is a database
         const db = JSON.parse(value)
-        newDB = Array[db].push(data)
+        newDB = [...db, data]
       } else {
         //it is necessary to create a new database
         newDB = [data]
@@ -35,8 +35,33 @@ export const useFavorites = () => {
     return []
   }
 
+  const removeFavorite = async (data) => {
+    console.log({ dataToRemove: data })
+    try {
+      let newDB
+      const value = await AsyncStorage.getItem(DB_KEY)
+      if (value !== null) {
+        const db = JSON.parse(value)
+        console.log({ currentDb: db })
+        newDB = db.filter(
+          (item) => item.id !== data.id && item.title !== data.title
+        )
+      } else {
+        newDB = []
+      }
+      console.log({ newDB })
+      const jsonValue = JSON.stringify(newDB)
+      await AsyncStorage.setItem(DB_KEY, jsonValue)
+      return newDB
+    } catch (error) {
+      console.log({ error })
+      return { error }
+    }
+  }
+
   return {
     addFavorite,
     getFavorites,
+    removeFavorite,
   }
 }

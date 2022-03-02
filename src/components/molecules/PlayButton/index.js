@@ -8,11 +8,11 @@ export const PlayButton = ({ onPress }) => {
     <PlayButtonContainer onPress={onPress}>
       <Ionicons
         name="play"
-        size={theme.metrics.px(12)}
+        size={theme.metrics.px(14)}
         color={theme.colors.black}
       />
-      <Text fontFamily="bold" size={14} color="black">
-        Play
+      <Text fontFamily="bold" size={14} color="black" mt={3} ml={4}>
+        Assistir
       </Text>
     </PlayButtonContainer>
   )

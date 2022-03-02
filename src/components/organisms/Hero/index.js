@@ -8,14 +8,46 @@ import { colors } from '~/styles/colors'
 import { Text, Logo } from '~/components/atoms'
 import { Tag, IconButton, PlayButton } from '~/components/molecules'
 import { useFavorites } from '~/services/hooks'
+import { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { useDataStore } from '~/services/stores'
 
 export const Hero = ({ item, onDetail }) => {
-  const { addFavorite, getFavorites } = useFavorites()
+  const navigation = useNavigation()
+  const { setSelectedData } = useDataStore()
+  const [loading, setLoading] = useState(true)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const { addFavorite, getFavorites, removeFavorite } = useFavorites()
   const { image_url, title, subtitle, type } = item
 
+  const checkIsFavorite = async () => {
+    setLoading(true)
+    const favorites = await getFavorites()
+    //console.log({ favorites })
+    const isInFavorite = favorites.filter(
+      (fv) => fv.id === item.id && fv.type === item.type
+    )
+    setIsFavorite(isInFavorite.length > 0)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    checkIsFavorite()
+  }, [])
+
   const addDataAsFavorite = async () => {
-    const result = await addFavorite(item)
-    console.log({ result })
+    await addFavorite(item)
+    checkIsFavorite()
+  }
+
+  const removeDataFromFavorites = async () => {
+    await removeFavorite(item)
+    checkIsFavorite()
+  }
+
+  const onPressWatch = () => {
+    setSelectedData(item)
+    navigation.navigate('Watch')
   }
 
   return (
@@ -33,8 +65,12 @@ export const Hero = ({ item, onDetail }) => {
           </Text>
           <Text size={18}>{subtitle}</Text>
           <ButtonsView>
-            <IconButton onPress={() => addDataAsFavorite()} label="Favoritos" iconName="add-circle-outline" />
-            <PlayButton />
+            <IconButton
+              onPress={() => isFavorite ? removeDataFromFavorites() : addDataAsFavorite()}
+              label={isFavorite ? "Remover Favorito" : "Adicionar Favorito"}
+              iconName={isFavorite ? "remove-circle-outline" : "add-circle-outline"}
+            />
+            <PlayButton onPress={onPressWatch} />
             {!onDetail && (
               <IconButton
                 label="Saiba mais"
