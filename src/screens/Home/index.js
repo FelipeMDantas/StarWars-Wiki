@@ -1,4 +1,10 @@
-import { HomeList, ScreenScrollContainer, Hero, Loader } from '../../components'
+import {
+  HomeList,
+  ScreenScrollContainer,
+  Hero,
+  Loader,
+  Container,
+} from '../../components'
 import { useGetData } from '~/services/hooks'
 import { useEffect, useState } from 'react'
 
@@ -25,9 +31,9 @@ export const Home = () => {
 
   if (loading) {
     return (
-      <ScreenScrollContainer>
+      <Container align="center" justify="center">
         <Loader />
-      </ScreenScrollContainer>
+      </Container>
     )
   }
 

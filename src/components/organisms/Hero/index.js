@@ -50,6 +50,11 @@ export const Hero = ({ item, onDetail }) => {
     navigation.navigate('Watch')
   }
 
+  const onPressDetail = () => {
+    setSelectedData(item)
+    navigation.navigate('Detail')
+  }
+
   return (
     <HeroContainer>
       <HeroImageBackground
@@ -66,13 +71,18 @@ export const Hero = ({ item, onDetail }) => {
           <Text size={18}>{subtitle}</Text>
           <ButtonsView>
             <IconButton
-              onPress={() => isFavorite ? removeDataFromFavorites() : addDataAsFavorite()}
-              label={isFavorite ? "Remover Favorito" : "Adicionar Favorito"}
-              iconName={isFavorite ? "remove-circle-outline" : "add-circle-outline"}
+              onPress={() =>
+                isFavorite ? removeDataFromFavorites() : addDataAsFavorite()
+              }
+              label={isFavorite ? 'Remover Favorito' : 'Adicionar Favorito'}
+              iconName={
+                isFavorite ? 'remove-circle-outline' : 'add-circle-outline'
+              }
             />
             <PlayButton onPress={onPressWatch} />
             {!onDetail && (
               <IconButton
+                onPress={onPressDetail}
                 label="Saiba mais"
                 iconName="information-circle-outline"
               />
