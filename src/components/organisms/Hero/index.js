@@ -6,7 +6,7 @@ import {
 } from './styles'
 import { colors } from '~/styles/colors'
 import { Text, Logo } from '~/components/atoms'
-import { Tag, IconButton, PlayButton } from '~/components/molecules'
+import { Tag, IconButton, PlayButton, FavoriteStateModal } from '~/components/molecules'
 import { useFavorites } from '~/services/hooks'
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
@@ -17,6 +17,7 @@ export const Hero = ({ item, onDetail }) => {
   const { setSelectedData } = useDataStore()
   const [loading, setLoading] = useState(true)
   const [isFavorite, setIsFavorite] = useState(false)
+  const [showFavoriteModal, setShowFavoriteModal] = useState(true)
   const { addFavorite, getFavorites, removeFavorite } = useFavorites()
   const { image_url, title, subtitle, type } = item
 
@@ -89,7 +90,15 @@ export const Hero = ({ item, onDetail }) => {
             )}
           </ButtonsView>
         </HeroGradient>
-      </HeroImageBackground>
+      </HeroImageBackground>{
+        showFavoriteModal && (
+          <FavoriteStateModal 
+            type="added"
+            visible={showFavoriteModal}
+            onClose={() => setShowFavoriteModal(false)}
+          />
+        )
+      }
     </HeroContainer>
   )
 }

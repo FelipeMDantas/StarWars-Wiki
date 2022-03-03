@@ -37,9 +37,14 @@ export const Home = () => {
     )
   }
 
+  const randomizeHomeScreenMovie = () => {
+    const randomValue = Math.floor(Math.random() * (films.length))
+    return randomValue
+  }
+
   return (
     <ScreenScrollContainer>
-      <Hero item={{ ...films[0], type: 'Filme' }} />
+      <Hero item={{ ...films[randomizeHomeScreenMovie()], type: 'Filme' }} />
       <HomeList title="Filmes" data={films} type="Filme" />
       <HomeList title="Personagens" data={characters} type="Personagem" />
     </ScreenScrollContainer>
