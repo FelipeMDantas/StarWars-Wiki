@@ -2,6 +2,7 @@ import {
   Modal,
   ModalBackgroundContainer,
   ModalContentContainer,
+  FavoriteImage,
 } from './styles'
 import { Text } from '~/components/atoms'
 import favoriteAdded from '../../../../assets/favorite-added.png'
@@ -12,7 +13,10 @@ export const FavoriteStateModal = ({ visible, onClose, type }) => {
     <Modal visible={visible} transparent onRequestClose={onClose}>
       <ModalBackgroundContainer>
         <ModalContentContainer>
-          <Text align="center" size={28} fontFamily="bold">
+          <FavoriteImage
+            source={type === 'added' ? favoriteAdded : favoriteRemoved}
+          />
+          <Text mt={24} align="center" size={28} fontFamily="bold">
             {`Favorito ${
               type === 'added' ? 'adicionado' : 'removido'
             } com sucesso!`}

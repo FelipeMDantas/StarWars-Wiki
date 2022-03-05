@@ -15,35 +15,41 @@ import { useDataStore } from '~/services/stores'
 export const Hero = ({ item, onDetail }) => {
   const navigation = useNavigation()
   const { setSelectedData } = useDataStore()
-  const [loading, setLoading] = useState(true)
   const [isFavorite, setIsFavorite] = useState(false)
-  const [showFavoriteModal, setShowFavoriteModal] = useState(true)
+  const [showFavoriteModal, setShowFavoriteModal] = useState(null)
   const { addFavorite, getFavorites, removeFavorite } = useFavorites()
   const { image_url, title, subtitle, type } = item
 
   const checkIsFavorite = async () => {
-    setLoading(true)
     const favorites = await getFavorites()
-    //console.log({ favorites })
     const isInFavorite = favorites.filter(
       (fv) => fv.id === item.id && fv.type === item.type
     )
     setIsFavorite(isInFavorite.length > 0)
-    setLoading(false)
   }
 
   useEffect(() => {
     checkIsFavorite()
   }, [])
 
+  const closeFavoriteModal = () => {
+    setTimeout(() => {
+      setShowFavoriteModal(null)
+    }, 1000)
+  }
+
   const addDataAsFavorite = async () => {
     await addFavorite(item)
+    setShowFavoriteModal('added')
     checkIsFavorite()
+    closeFavoriteModal()
   }
 
   const removeDataFromFavorites = async () => {
     await removeFavorite(item)
+    setShowFavoriteModal('removed')
     checkIsFavorite()
+    closeFavoriteModal()
   }
 
   const onPressWatch = () => {
@@ -91,11 +97,11 @@ export const Hero = ({ item, onDetail }) => {
           </ButtonsView>
         </HeroGradient>
       </HeroImageBackground>{
-        showFavoriteModal && (
+        !!showFavoriteModal && (
           <FavoriteStateModal 
-            type="added"
-            visible={showFavoriteModal}
-            onClose={() => setShowFavoriteModal(false)}
+            type={showFavoriteModal}
+            visible={!!showFavoriteModal}
+            onClose={() => setShowFavoriteModal(null)}
           />
         )
       }
