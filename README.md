@@ -2,17 +2,20 @@
 
 ## A stylish mobile app that muster some info about Star Wars 
 
-![Felipe|StarWarsWiki](https://img.shields.io/badge/FelipeMDantas-FindHouses-purple)
+![Felipe|StarWarsWiki](https://img.shields.io/badge/FelipeMDantas-Star%20Wars%20Wiki-black)
 ![ReactNative](https://img.shields.io/badge/POWERED%20BY:%20React%20Native-blue)
 ![Expo](https://img.shields.io/badge/POWERED%20BY:%20Expo-white)
 
 >Star Wars Wiki is an app related to the Star Wars universe that exhibits information about its movies and characters provided by a tailor-made API.
 
-![See the app](https://github.com/FelipeMDantas/StarWars-Wiki/images/app_gif.gif)
+### See the app
+<img height="760px" width="360" src = images/app_gif.gif>
 
 <p>
 
-[![Watch the app](https://img.youtube.com/vi/Hkrfo3b6x6k/0.jpg)](https://www.youtube.com/watch?v=Hkrfo3b6x6k)
+### Click in the image below (Youtube video) to watch more details
+    
+<a href="https://www.youtube.com/watch?v=Hkrfo3b6x6k"><img src="https://img.youtube.com/vi/Hkrfo3b6x6k/0.jpg"></a>
 
 ## Features
 
